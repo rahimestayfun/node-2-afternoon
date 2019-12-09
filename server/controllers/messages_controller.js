@@ -1,0 +1,54 @@
+let messages = [];
+let id = 0;
+
+
+module.exports={
+createMessage: (req,res) => {
+    // const message = {
+    //     id,
+    //     text: req.body.text,
+    //     time: req.body.time,
+    // }
+    // messages.push(message);
+
+    const {text,time}= req.body;  
+    messages.push({text,time,id});
+    id++;
+    res.status(200).json(messages)
+},
+
+
+readMessage: (req,res) => {
+    res.status(200).json(messages)
+},
+
+updateMessage: (req,res) => {
+    const {id} = req.params;
+    const {text} = req.body;
+    // const updateID = req.params.id;
+    // const messageIndex = messages.findIndex(message => message.id == updateID);
+    const messageIndex= messages.findIndex( message => message.id == id);
+    let message = messages [messageIndex];
+    messages[messageIndex] ={
+        id: message.id,
+        text: text || message.text, 
+        time: message.time
+    }
+    res.status(200).json(messages)
+},
+
+deleteMessage: (req,res) => {
+    const {id}= req.params;
+    const messageIndex= messages.findIndex(message=>message.id == id);
+    messages.splice(messageIndex,1);
+    res.status(200).json(messages)
+}
+}
+
+
+
+
+
+
+
+
