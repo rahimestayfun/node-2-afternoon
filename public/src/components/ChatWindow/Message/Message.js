@@ -25,7 +25,7 @@ export default class Message extends Component {
     const { id, edit } = this.props;
     if( event.key === "Enter" && text.length !== 0 ) {
       edit( id, text );
-      this.setState({ editting: false });
+      this.setState({ editing: false });
     }
   }
 
